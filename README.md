@@ -1,23 +1,12 @@
-# About
-```
-       _     _             
-   ___| |__ | |_ _ __ ___  
-  / __| '_ \| __| '_ ` _ \ 
-  \__ \ | | | |_| | | | | |
-  |___/_| |_|\__|_| |_| |_|
-
-```
-
-shtm - minimalistic, shell-like task manager built on pure C++
-
-# Usage
+# shtm
+## Usage
 + '+' - new task (+TODO: Code)
 + '=' - toggle task (=1)
 + '-' - remove task (-1)
 + 'q' - exit the vitm (q)
 
-# Building
-### Dependencies:
+## Building
+#### Dependencies:
 + gcc
 + make
 + cmake
@@ -33,8 +22,8 @@ sudo pacman -S gcc make cmake
 sudo apt install build-essentials cmake
 ```
 
-### Building
-1. Retrieve source code from github
+#### Building
+1. Get source code from github
 ```
 git clone https://github.org/slody08/shtm.git
 ```
