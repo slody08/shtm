@@ -1,7 +1,7 @@
 #include <shtm.hpp>
 
-void shtm::shtm::cast_tasks() {
-  std::vector<std::wstring> segment_list = split(source, L"\\;");
+void shtm::cast_tasks() {
+  vector<wstring> segment_list = split(source, L"\\;");
 
   for (int i = 0; i < segment_list.size(); i += 2) {
     tasks.push_back(
@@ -10,49 +10,49 @@ void shtm::shtm::cast_tasks() {
   }
 }
 
-void shtm::shtm::list() {
+void shtm::list() {
   bool all_task_done = true;
   for (int i = 0; i < tasks.size(); i++) {
     if (tasks[i].state) {
-      std::wcout << " . ";
+      wcout << " . ";
       all_task_done = false;
     } else
-      std::wcout << " x ";
+      wcout << " x ";
     
-    std::wcout << i+1 << L". " << tasks[i].data << std::endl;
+    wcout << i+1 << L". " << tasks[i].data << endl;
   }
 
   if (tasks.size() == 0) {
     all_task_done = false;
   }
   
-  if (all_task_done && error == error_t::EmptyErrorException)
-    set_error(error_t::AllTasksDoneException);
+  if (all_task_done && error == EmptyErrorException)
+    set_error(AllTasksDoneException);
 }
 
-void shtm::shtm::operator+(std::wstring data) {
+void shtm::operator+(wstring data) {
   tasks.push_back(
     {data, true}
   );
 }
 
-void shtm::shtm::operator-(int id) {
+void shtm::operator-(int id) {
   if (tasks.size() == 0)
     return;
   
   if (id < 0 || id > tasks.size()-1) {
-    set_error(error_t::TaskDoesntExistException);
+    set_error(TaskDoesntExistException);
     return;
   }
   tasks.erase(tasks.begin() + id);
 }
 
-void shtm::shtm::operator=(int id) {
+void shtm::operator=(int id) {
   if (tasks.size() == 0)
     return;
   
   if (id < 0 || id > tasks.size()-1) {
-    set_error(error_t::TaskDoesntExistException);
+    set_error(TaskDoesntExistException);
     return;
   }
   tasks[id].state = !tasks[id].state;

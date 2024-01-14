@@ -3,7 +3,7 @@
 #include <shtm.hpp>
 
 /*  Terminal clearing */
-void shtm::clear() {
+void clear() {
   std::wcout << L"\033[H\033[J";
   fflush(stdout);
 }
@@ -14,11 +14,11 @@ void shtm::clear() {
   + x - int
   + y - int
 */
-void shtm::move(int x, int y) {
+void move(int x, int y) {
   std::wcout << L"\033[" << y << L";" << x << L"H";
 }
 
-std::string shtm::format(std::string f, ...) {
+std::string format(std::string f, ...) {
   va_list list;
 
   va_start(list, f);
@@ -31,7 +31,7 @@ std::string shtm::format(std::string f, ...) {
   return buffer;
 }
 
-std::vector<std::wstring> shtm::split(std::wstring source, std::wstring delim) {
+std::vector<std::wstring> split(std::wstring source, std::wstring delim) {
   size_t position = 0;
   std::vector<std::wstring> segments;
 
@@ -43,16 +43,35 @@ std::vector<std::wstring> shtm::split(std::wstring source, std::wstring delim) {
   return segments;
 }
 
+bool only_numbers(wstring str) {
+  bool has_only_numbers = true;
+
+  for (wchar_t c : str) {
+    if (find(digits.begin(), digits.end(), c) == digits.end())
+      has_only_numbers = false;
+  }
+
+  return has_only_numbers;
+}
+
 /* Program class initializer */
-shtm::shtm::shtm() {
+shtm::shtm() {}
+
+void shtm::init() {
+  setlocale(LC_CTYPE, "");
+  signal(SIGINT, close);
   winsize size;
   ioctl(0, TIOCGWINSZ, &size);
   width = size.ws_col, height = size.ws_row;
+  self = this;
 }
 
-void shtm::shtm::close(int param) {
+void shtm::close(int param) {
   clear();
-  cast_rc();
-  save(source);
+  self->cast_rc();
+  self->save(self->source);
   exit(0);
 }
+
+int shtm::get_width() {return width;}
+int shtm::get_height() {return height;}

@@ -15,61 +15,110 @@
 #include <codecvt>
 #include <locale>
 #include <uchar.h>
+#include <map>
+#include <format>
+#include <algorithm>
+using namespace std;
 
 #define SHTM_VERSION  "0.3.1"
 #define HOME_DIR getpwuid(getuid())->pw_dir
 #define SHTM_RC  ".shtmrc"
 
-namespace shtm {
-  void clear();
-  void move(int x, int y);
 
-  std::string format(std::string f, ...);
-  std::vector<std::wstring> split(std::wstring source, std::wstring delim);
+void clear();
+void move(int x, int y);
 
-  struct task_t {
-    std::wstring data;
-    bool state;
-  };
+//string format(string f, ...);
+vector<wstring> split(wstring source, wstring delim);
 
-  enum class error_t {
-    EmptyErrorException,
-    UndefinedCommandException,
-    AllTasksDoneException,
-    InformationException,
-    EmptyInputDataException,
-    TaskDoesntExistException,
-  };
+const vector<wchar_t> digits {
+  L'0',
+  L'1',
+  L'2',
+  L'3',
+  L'4',
+  L'5',
+  L'6',
+  L'7',
+  L'8',
+  L'9'
+};
 
-  class shtm {
-  private:
-    std::string rc_path();
-    std::wstring source;
-    std::vector<task_t> tasks;
-    error_t error;
+bool only_numbers(wstring str);
+
+struct task_t {
+  wstring data;
+  bool state;
+};
+
+enum shtm_error_t {
+  EmptyErrorException,
+  UndefinedCommandException,
+  AllTasksDoneException,
+  InformationException,
+  EmptyInputDataException,
+  TaskDoesntExistException,
+};
+
+enum token_t {
+  AddTask,
+  ToggleTask,
+  RemoveTask,
+  HelpMenu,
+  Quit
+};
+
+const map<wchar_t, token_t> token_table {
+  {L'+', AddTask},
+  {L'-', RemoveTask},
+  {L'=', ToggleTask},
+  {L'?', HelpMenu},
+  {L'q', Quit}
+};
+
+class shtm {
+private:
+  string rc_path();
+  wstring source;
+  vector<task_t> tasks;
+  shtm_error_t error;
+  map<token_t, void (*)(shtm *, wstring)> function_map;
+  int width;
+  int height;
+
+public:
+  // Constructors
+  shtm();
+  void init();
+
+  // Config managment
+  bool load();
+  bool save(wstring data = L"");
   
-  public:
-    int width;
-    int height;
+  // Casters
+  void cast_tasks();
+  void cast_rc();
 
-    shtm();
+  // Functional
+  void add_function(token_t token, void (*func)(shtm *, wstring));
+  void list();
+  void operator+(wstring data);
+  void operator-(int id);
+  void operator=(int id);
+  void mainloop();
 
-    bool load();
-    bool save(std::wstring data = L"");
+  // Error handling
+  wstring get_error();
+  void set_error(shtm_error_t err);
 
-    void cast_tasks();
-    void cast_rc();
+  // Deinitialize program
+  static void close(int param = 0);
 
-    void list();
-    void operator+(std::wstring data);
-    void operator-(int id);
-    void operator=(int id);
+  // Terminal size
+  int get_width();
+  int get_height();
+};
 
-    std::wstring get_error();
-    void set_error(error_t err);
-
-    void close(int param = 0);
-  };
-}
+static shtm *self;
 
 #endif

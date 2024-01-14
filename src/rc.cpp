@@ -1,37 +1,37 @@
 #include <shtm.hpp>
 
-std::string shtm::shtm::rc_path() {
-  return format("%s/%s", HOME_DIR, SHTM_RC);
+string shtm::rc_path() {
+  return format("{}/{}", HOME_DIR, SHTM_RC);
 }
 
-bool shtm::shtm::load() {
-  std::string path = rc_path();
-  std::wifstream file(rc_path());
+bool shtm::load() {
+  string path = rc_path();
+  wifstream file(rc_path());
   if (file.fail())
     return false;
 
   file.imbue(
-    std::locale(std::locale(), new std::codecvt_utf8<wchar_t>)
+    locale(locale(), new codecvt_utf8<wchar_t>)
   );
   
-  std::wstringstream stream;
+  wstringstream stream;
   stream << file.rdbuf();
 
   file.close();
 
   source = stream.str();
-  std::wcout << source << std::endl;
+  wcout << source << endl;
 
   return true;
 }
 
-bool shtm::shtm::save(std::wstring data) {
-  std::wofstream file(rc_path());
+bool shtm::save(wstring data) {
+  wofstream file(rc_path());
   if (file.fail())
     return false;
 
   file.imbue(
-    std::locale(std::locale(), new std::codecvt_utf8<wchar_t>)
+    locale(locale(), new codecvt_utf8<wchar_t>)
   );
   
   file << source;
@@ -40,7 +40,7 @@ bool shtm::shtm::save(std::wstring data) {
   return true;
 }
 
-void shtm::shtm::cast_rc() {
+void shtm::cast_rc() {
   source = L"";
 
   for (task_t task : tasks) {
