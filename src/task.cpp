@@ -20,14 +20,23 @@ void shtm::shtm::cast_tasks() {
 }
 
 void shtm::shtm::list() {
+  bool all_task_done = true;
   for (int i = 0; i < tasks.size(); i++) {
-    if (tasks[i].state)
+    if (tasks[i].state) {
       std::wcout << " . ";
-    else
+      all_task_done = false;
+    } else
       std::wcout << " x ";
     
     std::wcout << i+1 << L". " << tasks[i].data << std::endl;
   }
+
+  if (tasks.size() == 0) {
+    all_task_done = false;
+  }
+  
+  if (all_task_done && error == error_t::EmptyErrorException)
+    set_error(error_t::AllTasksDoneException);
 }
 
 void shtm::shtm::operator+(std::wstring data) {
@@ -37,9 +46,23 @@ void shtm::shtm::operator+(std::wstring data) {
 }
 
 void shtm::shtm::operator-(int id) {
+  if (tasks.size() == 0)
+    return;
+  
+  if (id < 0 || id > tasks.size()-1) {
+    set_error(error_t::TaskDoesntExistException);
+    return;
+  }
   tasks.erase(tasks.begin() + id);
 }
 
 void shtm::shtm::operator=(int id) {
+  if (tasks.size() == 0)
+    return;
+  
+  if (id < 0 || id > tasks.size()-1) {
+    set_error(error_t::TaskDoesntExistException);
+    return;
+  }
   tasks[id].state = !tasks[id].state;
 }

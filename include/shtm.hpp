@@ -16,51 +16,44 @@
 #include <locale>
 #include <uchar.h>
 
-#define VERSION  L"0.2"
+#define SHTM_VERSION  L"0.2"
 #define HOME_DIR getpwuid(getuid())->pw_dir
 #define SHTM_RC  ".shtmrc"
 
 namespace shtm {
-  /*  Terminal clearing */
   void clear();
-
-  /*  Moves terminal cursor to X, Y
-  
-    params:
-    + x - int
-    + y - int
-  */
   void move(int x, int y);
 
   std::string format(std::string f, ...);
 
-  /* Task structure */
   struct task_t {
     std::wstring data;
     bool state;
   };
 
-  /*  Program class */
+  enum class error_t {
+    EmptyErrorException,
+    UndefinedCommandException,
+    AllTasksDoneException,
+    InformationException,
+    EmptyInputDataException,
+    TaskDoesntExistException,
+  };
+
   class shtm {
   private:
     std::string rc_path();
-
     std::wstring source;
-
     std::vector<task_t> tasks;
+    error_t error;
   
   public:
-    /*  Width of the terminal window */
     int width;
-    /* Height of the terminal window */
     int height;
 
-    /* Class initializer */
     shtm();
 
-    /* File loading function */
     bool load();
-    /* File saving function */
     bool save(std::wstring data = L"");
 
     void cast_tasks();
@@ -70,6 +63,9 @@ namespace shtm {
     void operator+(std::wstring data);
     void operator-(int id);
     void operator=(int id);
+
+    std::wstring get_error();
+    void set_error(error_t err);
 
     void close(int param = 0);
   };
