@@ -1,1 +1,0 @@
-/sbin/g++ -O3 -DNDEBUG CMakeFiles/shtm.dir/src/main.cpp.o CMakeFiles/shtm.dir/src/rc.cpp.o CMakeFiles/shtm.dir/src/shtm.cpp.o CMakeFiles/shtm.dir/src/task.cpp.o CMakeFiles/shtm.dir/src/error.cpp.o -o shtm 

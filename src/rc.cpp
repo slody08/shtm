@@ -44,10 +44,10 @@ void shtm::shtm::cast_rc() {
   source = L"";
 
   for (task_t task : tasks) {
-    source.append(task.data + L";");
+    source.append(task.data + L"\\;");
     if (task.state)
-      source += L"1;";
+      source += L"1\\;";
     else
-      source += L"0;";
+      source += L"0\\;";
   }
 }

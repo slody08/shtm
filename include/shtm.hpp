@@ -16,7 +16,7 @@
 #include <locale>
 #include <uchar.h>
 
-#define SHTM_VERSION  L"0.2"
+#define SHTM_VERSION  "0.3.1"
 #define HOME_DIR getpwuid(getuid())->pw_dir
 #define SHTM_RC  ".shtmrc"
 
@@ -25,6 +25,7 @@ namespace shtm {
   void move(int x, int y);
 
   std::string format(std::string f, ...);
+  std::vector<std::wstring> split(std::wstring source, std::wstring delim);
 
   struct task_t {
     std::wstring data;

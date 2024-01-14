@@ -19,7 +19,7 @@ std::wstring shtm::shtm::get_error() {
       return L"- Unknown command!";
     
     case error_t::TaskDoesntExistException:
-      return L"Invalid task ID!";
+      return L"- Invalid task ID!";
 
     default:
       return L"UNDEFINED_SHTM_ERROR";

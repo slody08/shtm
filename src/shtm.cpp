@@ -23,12 +23,24 @@ std::string shtm::format(std::string f, ...) {
 
   va_start(list, f);
 
-  char *buffer = (char *)malloc(64);
+  char *buffer = (char *)malloc(512);
   vsprintf(buffer, f.c_str(), list);
 
   va_end(list);
 
   return buffer;
+}
+
+std::vector<std::wstring> shtm::split(std::wstring source, std::wstring delim) {
+  size_t position = 0;
+  std::vector<std::wstring> segments;
+
+  while ((position = source.find(delim)) != std::string::npos) {
+    segments.push_back(source.substr(0, position));
+    source.erase(0, position + delim.size());
+  }
+
+  return segments;
 }
 
 /* Program class initializer */

@@ -1,16 +1,7 @@
 #include <shtm.hpp>
 
 void shtm::shtm::cast_tasks() {
-  std::wcout << source << std::endl;
-
-  std::wstringstream stream(source);
-  std::wstring segment;
-  std::vector<std::wstring> segment_list;
-
-  while(std::getline(stream, segment, L';')) {
-    std::wcout << segment << std::endl;
-    segment_list.push_back(segment);
-  }
+  std::vector<std::wstring> segment_list = split(source, L"\\;");
 
   for (int i = 0; i < segment_list.size(); i += 2) {
     tasks.push_back(
