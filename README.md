@@ -3,7 +3,7 @@
 + '+' - new task (+TODO: Code)
 + '=' - toggle task (=1)
 + '-' - remove task (-1)
-+ 'q' - exit the vitm (q)
++ 'q' - exit the shtm (q)
 
 ## Building
 #### Dependencies:
