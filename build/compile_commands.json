@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/slody08/projects/shtm/build",
+  "command": "/sbin/g++  -I/home/slody08/projects/shtm/include -O3 -DNDEBUG -o CMakeFiles/shtm.dir/src/main.cpp.o -c /home/slody08/projects/shtm/src/main.cpp",
+  "file": "/home/slody08/projects/shtm/src/main.cpp",
+  "output": "CMakeFiles/shtm.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/slody08/projects/shtm/build",
+  "command": "/sbin/g++  -I/home/slody08/projects/shtm/include -O3 -DNDEBUG -o CMakeFiles/shtm.dir/src/rc.cpp.o -c /home/slody08/projects/shtm/src/rc.cpp",
+  "file": "/home/slody08/projects/shtm/src/rc.cpp",
+  "output": "CMakeFiles/shtm.dir/src/rc.cpp.o"
+},
+{
+  "directory": "/home/slody08/projects/shtm/build",
+  "command": "/sbin/g++  -I/home/slody08/projects/shtm/include -O3 -DNDEBUG -o CMakeFiles/shtm.dir/src/shtm.cpp.o -c /home/slody08/projects/shtm/src/shtm.cpp",
+  "file": "/home/slody08/projects/shtm/src/shtm.cpp",
+  "output": "CMakeFiles/shtm.dir/src/shtm.cpp.o"
+},
+{
+  "directory": "/home/slody08/projects/shtm/build",
+  "command": "/sbin/g++  -I/home/slody08/projects/shtm/include -O3 -DNDEBUG -o CMakeFiles/shtm.dir/src/task.cpp.o -c /home/slody08/projects/shtm/src/task.cpp",
+  "file": "/home/slody08/projects/shtm/src/task.cpp",
+  "output": "CMakeFiles/shtm.dir/src/task.cpp.o"
+},
+{
+  "directory": "/home/slody08/projects/shtm/build",
+  "command": "/sbin/g++  -I/home/slody08/projects/shtm/include -O3 -DNDEBUG -o CMakeFiles/shtm.dir/src/error.cpp.o -c /home/slody08/projects/shtm/src/error.cpp",
+  "file": "/home/slody08/projects/shtm/src/error.cpp",
+  "output": "CMakeFiles/shtm.dir/src/error.cpp.o"
+}
+]

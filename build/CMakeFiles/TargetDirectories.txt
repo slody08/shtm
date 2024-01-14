@@ -1,0 +1,3 @@
+/home/slody08/projects/shtm/build/CMakeFiles/shtm.dir
+/home/slody08/projects/shtm/build/CMakeFiles/edit_cache.dir
+/home/slody08/projects/shtm/build/CMakeFiles/rebuild_cache.dir
